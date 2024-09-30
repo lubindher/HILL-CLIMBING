@@ -1,6 +1,6 @@
 <h1>ExpNo 5 : Implement Simple Hill Climbing Algorithm</h1> 
-<h3>Name:             </h3>
-<h3>Register Number:             </h3>
+<h3>Name:  LUBINDHER S          </h3>
+<h3>Register Number:  212222240056        </h3>
 <H3>Aim:</H3>
 <p>Implement Simple Hill Climbing Algorithm and Generate a String by Mutating a Single Character at each iteration </p>
 <h2> Theory: </h2>
@@ -38,24 +38,90 @@ Feedback is provided in terms of heuristic function
 <h3>Step-4:</h3>
 <p> Lopp Step -2 and Step-3  until we achieve the score to be Zero to achieve Global Minima.</p>
 
+## PROGRAM:
+```
+import random
+import string
+def generate_random_solution(answer):
+    l= len(answer)
+    return [random.choice(string.printable) for _ in range(l)]
+def evaluate(solution,answer):
+    print(solution)
+    target=list(answer)
+    diff=0
+    for i in range(len(target)):
+        s=solution[i]
+        t=target[i]
+        #to calculate the "difference" between two strings, character by character.
+        #ord(s) - ord(t) calculates the difference between the ASCII values of the characters s and t.
+         #abs() takes the absolute value of this difference to ensure that it is non-negative. This is important because the difference could be negative if s is less than t in terms of ASCII value.
+         #The absolute value ensures that the difference is always positive or zero.
+        diff += abs(ord(s) - ord(t))
+    return diff
+def mutate_solution(solution):
+    ind=random.randint(0,len(solution)-1)
+    solution[ind]=random.choice(string.printable)
+    return solution
+def SimpleHillClimbing():
+    answer="Artificial Intelligence"
+    best=generate_random_solution(answer)
+    best_score=evaluate(best,answer)
+    while True:
+        print("Score:",best_score," Solution : ","".join(best))  
+        if best_score==0:
+            break
+        new_solution=mutate_solution(list(best))
+        score=evaluate(new_solution,answer)   
+        if score<best_score:
+            best=new_solution
+            best_score=score
+#answer="Artificial Intelligence"
+#print(generate_random_solution(answer))
+#solution=generate_random_solution(answer)
+#print(evaluate(solution,answer))
+SimpleHillClimbing()
+```
+
 <hr>
 <h2>Sample Input and Output</h2>
 <h2>Sample String:</h2> Artificial Intelligence
 <h2>Output:</h2>
-Score: 643  Solution :  8RzF:oG ]%;CPORRMe!zGvk<br>
-Score: 609  Solution :  8RzF:oG ]%;CPqRRMe!zGvk<br>
-Score: 604  Solution :  8RzF:oG ]%;CPqRRMe!zGqk<br>
-Score: 594  Solution :  8RzF:oG ]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', 't', '2', 'l', 'l', 'i', 'g', 'e', 'n', 'd', 'e']
+Score: 1  Solution :  Artificial Intelligende
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'e', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'n', 'd', 'e']
+Score: 1  Solution :  Artificial Intelligende
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'N', 'i', 'g', 'e', 'n', 'd', 'e']
+Score: 1  Solution :  Artificial Intelligende
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', '|', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'n', 'd', 'e']
+Score: 1  Solution :  Artificial Intelligende
+['A', 'r', 't', 'r', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'n', 'd', 'e']
+Score: 1  Solution :  Artificial Intelligende
+['A', 'M', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'n', 'd', 'e']
+Score: 1  Solution :  Artificial Intelligende
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', '^', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'n', 'd', 'e']
+Score: 1  Solution :  Artificial Intelligende
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'n', 'c', 'e']
+Score: 0  Solution :  Artificial Intelligence
 ....................................................<br>
 ..................................................<br>
 ................................................<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 0  Solution :  Artificial Intelligence<br>
+Streaming output truncated to the last 5000 lines.
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', '}', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'o', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+['A', 'r', 't', 'i', 'f', 'i', 'c', '{', 'a', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'o', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+['A', 'r', 't', 'i', 'f', 'i', '"', 'i', 'a', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'o', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', '*', 'e', 'l', 'l', 'i', 'g', 'e', 'o', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'a', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'I', 'n', 't', 'S', 'l', 'l', 'i', 'g', 'e', 'o', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', 'l', ' ', 'o', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'o', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+['A', 'r', 't', 'i', 'f', 'i', 'c', 'i', 'a', '<', ' ', 'I', 'n', 't', 'e', 'l', 'l', 'i', 'g', 'e', 'o', 'd', 'e']
+Score: 2  Solution :  Artificial Intelligeode
+
+## RESULT:
+ Thus the Simple Hill Climb Algorithm Implemented successfully.
